@@ -1,0 +1,5 @@
+uploads
+dist
+node_modules
+public
+.env

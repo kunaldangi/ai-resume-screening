@@ -1,0 +1,12 @@
+{
+    "verbose": true,
+    "ignore": [
+        "dist"
+    ],
+    "watch": [
+        "src",
+        "./client/src"
+    ],
+    "ext": "ts tsx css",
+    "exec": "npm run build:ui && npm run build && npm run start"
+}
