@@ -1,3 +1,4 @@
+import { config } from 'dotenv'; config();
 import express from 'express';
 import path from 'path';
 
@@ -12,6 +13,6 @@ app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
