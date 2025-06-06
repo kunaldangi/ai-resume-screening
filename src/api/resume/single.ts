@@ -18,9 +18,7 @@ export default async function singleResume(req: Request, res: Response): Promise
     try {
         const file = req.file;
 
-        if (!file || !file.path) {
-            return res.status(400).json({ error: 'No file uploaded' });
-        }
+        if (!file || !file.path) return res.status(400).json({ error: 'No file uploaded' });
 
         const filePath = path.join(__dirname, '../../../', file.path); // adjust as needed
         const dataBuffer = await fs.readFile(filePath);

@@ -1,10 +1,13 @@
 import { config } from 'dotenv'; config();
 import express from 'express';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import initializeRoutes from './api/index';
 
 const app = express();
+
+app.use(bodyParser.json());
 
 initializeRoutes(app);
 

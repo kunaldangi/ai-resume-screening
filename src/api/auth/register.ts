@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 
 export async function register(req: Request, res: Response): Promise<any> {
     // Here you would typically handle user registration logic, such as saving the user to a database.
