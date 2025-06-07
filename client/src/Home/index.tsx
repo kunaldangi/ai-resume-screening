@@ -91,40 +91,42 @@ function App() {
 			<div className='home__header--desc'>Upload resumes and provide a prompt to let the AI shortlist them</div>
 		</div>
 
-		<div className="home__content">
-			<div className="home__title">Upload Resumes</div>
+		<div className="home__body">
+			<div className="home__content">
+				<div className="home__title">Upload Resumes</div>
 
-			<label className="home__fileType" htmlFor="file-type">File Type:</label>
-			<select className='home__fileType--select' id="file-type" value={fileType} onChange={(e) => setFileType(e.target.value)}>
-				<option value="pdf">PDF/DOC/DOCX</option>
-				<option value="rar">ZIP/RAR</option>
-			</select>
+				<label className="home__fileType" htmlFor="file-type">File Type:</label>
+				<select className='home__fileType--select' id="file-type" value={fileType} onChange={(e) => setFileType(e.target.value)}>
+					<option value="pdf">PDF/DOC/DOCX</option>
+					<option value="rar">ZIP/RAR</option>
+				</select>
 
-			{fileType == 'rar' && <p className="home__note">Note: For ZIP/RAR files, please ensure they contain only resumes.</p>}
+				{fileType == 'rar' && <p className="home__note">Note: For ZIP/RAR files, please ensure they contain only resumes.</p>}
 
-			<label className='home__resume' htmlFor="resume-upload">Choose resume files {fileType == 'pdf' ? <>(PDF/DOC/DOCX)</> : <>(ZIP/RAR)</>}:</label>
-			<input className='home__resume--fileInpt' type="file" id="resume-upload" name="resumes" accept={fileType == 'pdf' ? ".pdf,.doc,.docx" : ".rar,.zip"} />
+				<label className='home__resume' htmlFor="resume-upload">Choose resume files {fileType == 'pdf' ? <>(PDF/DOC/DOCX)</> : <>(ZIP/RAR)</>}:</label>
+				<input className='home__resume--fileInpt' type="file" id="resume-upload" name="resumes" accept={fileType == 'pdf' ? ".pdf,.doc,.docx" : ".rar,.zip"} />
 
-			<label className='home__prompt' htmlFor="prompt">Screening Prompt / Job Requirements:</label>
-			<textarea className='home__prompt--inpt' id="prompt" placeholder="Enter requirements or a job description..." value={prompt} onChange={(e) => setPrompt(e.target.value)}></textarea>
+				<label className='home__prompt' htmlFor="prompt">Screening Prompt / Job Requirements:</label>
+				<textarea className='home__prompt--inpt' id="prompt" placeholder="Enter requirements or a job description..." value={prompt} onChange={(e) => setPrompt(e.target.value)}></textarea>
 
-			<button className='home__sumbit' onClick={handleSubmit} disabled={isLoading} >Submit to AI</button>
+				<button className='home__sumbit' onClick={handleSubmit} disabled={isLoading} >Submit to AI</button>
 
-			<div className="home__results" id="results">
-				{
-					response.map((res, index) => {
-						return (
-							<div key={index} className="home__result--card">
-								<div className={`home__result--status ${res.message.includes('Not Shortlisted') ? 'home__result--not-shortlisted' : 'home__result--shortlisted'}`}>
-									{res.message.includes('Not Shortlisted') ? '❌ Not Shortlisted' : '✅ Shortlisted'}
+				<div className="home__results" id="results">
+					{
+						response.map((res, index) => {
+							return (
+								<div key={index} className="home__result--card">
+									<div className={`home__result--status ${res.message.includes('Not Shortlisted') ? 'home__result--not-shortlisted' : 'home__result--shortlisted'}`}>
+										{res.message.includes('Not Shortlisted') ? '❌ Not Shortlisted' : '✅ Shortlisted'}
+									</div>
+									<div className="home__reason">
+										Reason: {res.message}
+									</div>
 								</div>
-								<div className="home__reason">
-									Reason: {res.message}
-								</div>
-							</div>
-						)
-					})
-				}
+							)
+						})
+					}
+				</div>
 			</div>
 		</div>
 	</>)
