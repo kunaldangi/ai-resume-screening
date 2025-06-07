@@ -6,14 +6,16 @@ import { Route } from 'react-router'
 import './index.css';
 
 import Home from './Home';
+import Login from './Login';
+import Register from './Register';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/login' element={<>LOGIN PAGE</>} />
-				<Route path='/register' element={<>REGISTER PAGE</>} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
 			</Routes>
 		</BrowserRouter>
 	</StrictMode>,

@@ -18,9 +18,7 @@ function App() {
 
 		const formData = new FormData();
 		const fileInput = document.getElementById('resume-upload') as HTMLInputElement;
-		if (fileInput.files && fileInput.files.length > 0) {
-			formData.append('resume', fileInput.files[0]);
-		}
+		if (fileInput.files && fileInput.files.length > 0) formData.append('resume', fileInput.files[0]);
 		formData.append('prompt', prompt);
 
 		try {
