@@ -21,9 +21,9 @@ export async function register(req: Request, res: Response): Promise<any> {
         const newUser = Users.build({username: username, email: email, password: hashedPassword});
         await newUser.save();
 
-        const token = jwt.sign(JSON.stringify({ userId: newUser.dataValues.id, username: newUser.dataValues.username, email: newUser.dataValues.email }), process.env.JWT_SESSION_SECRET as string);
+        const token = jwt.sign({ userId: newUser.dataValues.id, username: newUser.dataValues.username, email: newUser.dataValues.email }, process.env.JWT_SESSION_SECRET as string);
 
-        res.cookie('token', token, { sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 * 7 });
+        res.cookie('session', token, { sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 * 7 });
         
         return res.status(200).json({
             status: 'success',

@@ -14,9 +14,9 @@ export async function login(req: Request, res: Response): Promise<any> {
 
     if(!await bcrypt.compare(password, user.dataValues.password)) return res.status(400).json({ status: 'error', message: 'Invalid password' });
 
-    const token = jwt.sign(JSON.stringify({ userId: user.dataValues.id, username: user.dataValues.username, email: user.dataValues.email }), process.env.JWT_SESSION_SECRET as string);
+    const token = jwt.sign({ userId: user.dataValues.id, username: user.dataValues.username, email: user.dataValues.email }, process.env.JWT_SESSION_SECRET as string);
 
-    res.cookie('token', token, { sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 * 7 });
+    res.cookie('session', token, { sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 * 7 });
 
     return res.status(200).json({
         status: 'success',
