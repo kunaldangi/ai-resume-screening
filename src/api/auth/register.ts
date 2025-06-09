@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import validator from "validator";
 
 import { Users } from "../../config/db";
 
@@ -11,6 +12,7 @@ export async function register(req: Request, res: Response): Promise<any> {
 
     if (!username || !password || !email) return res.status(400).json({ status: 'error', message: 'Username, password, and email are required'});
 
+    if (!validator.isEmail(email)) return res.status(400).json({ status: 'error', message: 'Invalid email!' });
     if(username.length < 3 || username.length > 32) return res.status(400).json({ status: 'error', message: 'Username must be between 3 and 32 characters' });
     if(password.length < 8) return res.status(400).json({ status: 'error', message: 'Password must be at least 8 characters long' });
 

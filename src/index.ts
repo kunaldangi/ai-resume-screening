@@ -17,18 +17,20 @@ app.use(bodyParser.json());
 initializeRoutes(app);
 
 app.use((req, res, next) => {
-    if(req.path == '/'){
+    console.log(req.path == '/', req.path.startsWith('/api/resume'))
+    if(req.path == '/' || req.path.startsWith('/api/resume')){
         let session = req.cookies.session;
         if(!session) return res.redirect('/login');
     
         try {
-            session = jwt.verify(session, `${process.env.JWT_SECRET}`);
+            session = jwt.verify(session, `${process.env.JWT_SESSION_SECRET}`);
         } catch (err) {
             console.error('Invalid session token:', err);
             return res.redirect('/login');
         }
     
         console.log('Session: ', session);
+        next();
     }
     else {
         console.log('Skipping session check for login/register');

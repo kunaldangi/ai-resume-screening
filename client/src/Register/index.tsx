@@ -1,9 +1,41 @@
 import { useNavigate } from 'react-router';
 import './style.css';
 
+import { ShowStatus } from '../Components/ShowStatus';
+import { useState } from 'react';
 
 export default function Register() {
     const navigate = useNavigate();
+
+    const [status, setStatus] = useState<{ type: string, message: string }[]>([]); // { type: '', message: '' } as elements
+
+    async function handleRegister() {
+        const username = (document.getElementById('id-username') as HTMLInputElement).value;
+        const email = (document.getElementById('id-email') as HTMLInputElement).value;
+        const password = (document.getElementById('id-password') as HTMLInputElement).value;
+
+        if (!username || !email || !password) return setStatus([...status, { type: 'warn', message: 'Please fill in all fields.' }]);
+
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+        if(data.status) {
+            if (data.status == 'success') {
+                setStatus([...status, { type: 'success', message: data.message }]);
+
+                return setTimeout(() => {
+                    navigate('/');
+                }, 2500);
+            }
+            return setStatus([...status, { type: data.status, message: data.message }]);
+        }
+    }
 
     return (<>
         <div className="register">
@@ -13,7 +45,7 @@ export default function Register() {
                     <input id='id-username' type="text" placeholder="Username" />
                     <input id='id-email' type="text" placeholder="Email" />
                     <input id='id-password' type="password" placeholder="Password" />
-                    <button>Register</button>
+                    <button onClick={handleRegister}>Register</button>
                     <a style={{ gap: "10px"}} href='/api/auth/google'>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
                             <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style={{mixBlendMode: "normal"}}><g transform="scale(5.12,5.12)"><path d="M25.99609,48c-12.68359,0 -23.00391,-10.31641 -23.00391,-23c0,-12.68359 10.32031,-23 23.00391,-23c5.74609,0 11.24609,2.12891 15.49219,5.99609l0.77344,0.70703l-7.58594,7.58594l-0.70312,-0.60156c-2.22656,-1.90625 -5.05859,-2.95703 -7.97656,-2.95703c-6.76562,0 -12.27344,5.50391 -12.27344,12.26953c0,6.76563 5.50781,12.26953 12.27344,12.26953c4.87891,0 8.73438,-2.49219 10.55078,-6.73828h-11.55078v-10.35547l22.55078,0.03125l0.16797,0.79297c1.17578,5.58203 0.23438,13.79297 -4.53125,19.66797c-3.94531,4.86328 -9.72656,7.33203 -17.1875,7.33203z"></path></g></g>
@@ -27,5 +59,11 @@ export default function Register() {
                 </div>
             </div>
         </div>
+
+        {
+            status.map((s, index) => {
+                return <ShowStatus key={index} type={s.type} message={s.message} close={() => setStatus(status.filter((_, i) => i !== index))} />
+            })
+        }
     </>);
 }
