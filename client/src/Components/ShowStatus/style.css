@@ -1,0 +1,43 @@
+.status {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.status__content {
+    max-width: 400px;
+    max-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    
+    background-color: var(--secondary-color);
+    font-size: 1.6rem;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+}
+
+.status__close {
+    padding: 5px 5px 0px 0px;
+
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    
+    color: var(--primary-color);
+}
+
+.status__close:hover {
+    color: var(--primary-color-dark);
+}
+
+.status__message {
+    max-height: 250px;
+    padding: 2px 20px 15px 10px;
+
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    gap: 10px;
+}
