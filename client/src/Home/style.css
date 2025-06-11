@@ -1,7 +1,18 @@
+.home {
+	width: 100vw;
+	height: 100vh;
+
+	display: flex;
+}
+
+.home__aside {
+	flex: 1;
+}
+
 .home__header {
 	display: flex;
-    flex-direction: column;
-    align-items: center;
+	flex-direction: column;
+	align-items: center;
 
 	color: var(--secondary-color);
 	background-color: var(--primary-color);
@@ -11,11 +22,11 @@
 	padding: 10px 0px;
 
 	font-size: 4.2rem;
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .home__header--desc {
-    padding: 10px 0;
+	padding: 10px 0;
 	font-size: 2rem;
 }
 
@@ -25,107 +36,14 @@
 	justify-content: center;
 }
 
-.home__content {
-	width: 800px;
-	padding: 32px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-
-	background: var(--secondary-color);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
+@media screen and (min-width: 768px) { /* to disable nav toggle */
+	.home__nav--toggle {
+		display: none;
+	}
 }
 
-.home__title {
-	margin-top: 0;
-
-	font-size: 2.4rem;
-	font-weight: 700;
-
-	color: var(--primary-color);
-}
-
-.home__fileType, .home__prompt, .home__resume {
-	display: block;
-	margin: 16px 0 8px;
-
-	color: #333;
-	font-size: 16px;
-	font-weight: 600;
-}
-
-.home__fileType--select {
-	padding: 8px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	background-color: #f9f9f9;
-	color: #333;
-	transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.home__note {
-	font-size: 1.6rem;
-}
-
-.home__resume--fileInpt, .home__prompt--inpt {
-	width: 100%;
-	padding: 12px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-}
-
-.home__prompt--inpt {
-	resize: vertical;
-	height: 120px;
-}
-
-.home__sumbit {
-	margin-top: 24px;
-	background-color: var(--primary-color);
-	color: var(--secondary-color);
-	border: none;
-	padding: 12px 24px;
-	font-size: 16px;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.home__sumbit:hover {
-	background-color: var(--primary-color-dark);
-}
-
-.home__results {
-	margin-top: 32px;
-	border-top: 1px solid #eee;
-	padding-top: 24px;
-}
-
-.home__result--card {
-	background: #f1f1f1;
-	border-radius: 6px;
-	padding: 16px;
-	margin-bottom: 16px;
-}
-
-.home__reason {
-	margin-top: 8px;
-	font-size: 15.2px;
-	color: #555;
-}
-
-.home__result--status {
-	font-weight: bold;
-}
-
-.home__result--shortlisted {
-	color: green;
-}
-
-.home__result--not-shortlisted {
-	color: red;
+@media screen and (max-width: 768px) {
+	.home__nav {
+		display: none
+	}
 }
