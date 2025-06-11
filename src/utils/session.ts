@@ -3,8 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 export async function parseSession(req: Request, res: Response, next: NextFunction) {
-    console.log('Parsing session for request:', req.path);
-    if(req.path == '/' || req.path.startsWith('/api/resume')){
+    if(req.path == '/' || req.path.startsWith('/api/resume') || req.path.startsWith('/api/users')) {
         let session = req.cookies.session;
         if(!session) return res.redirect('/login');
     
