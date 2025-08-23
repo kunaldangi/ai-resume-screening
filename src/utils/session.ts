@@ -19,7 +19,7 @@ export async function parseSession(req: Request, res: Response, next: NextFuncti
         req.session = session;
         next();
     }
-    else if(req.path.startsWith('/api/resume') || req.path.startsWith('/api/users')){
+    else if(req.path.startsWith('/api/resume') || req.path.startsWith('/api/users') || req.path.startsWith('/api/google')) {
         if(!session) return res.status(401).json({status: 'error', message: 'Unauthorized access!'});
 
         try {

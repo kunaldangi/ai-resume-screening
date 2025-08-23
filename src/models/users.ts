@@ -20,6 +20,10 @@ export async function initializeUsersModel(sequelize: Sequelize) {
         password: {
             type: DataTypes.STRING(62),
             allowNull: false
-        }
+        },
+        googleAccessToken: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
     })
 }
