@@ -9,6 +9,8 @@ export default function Login() {
     const navigate = useNavigate();
 
     const [status, setStatus] = useState<{ type: string, message: string }[]>([]); // { type: '', message: '' } as elements
+    const [email, setEmail] = useState<string>('johndoe@gmail.com');
+    const [password, setPassword] = useState<string>('12345678');
 
     useEffect(() => {
         const session = getCookie('session');
@@ -48,8 +50,8 @@ export default function Login() {
             <div className="login__content">
                 <div className="login__title">Login</div>
                 <div className="login__form">
-                    <input id='id-email' type="text" placeholder="Email" />
-                    <input id='id-password' type="password" placeholder="Password" />
+                    <input id='id-email' type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input id='id-password' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <button onClick={handleLogin}>Login</button>
                     <a style={{ gap: "10px" }} href='/api/auth/google'>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
