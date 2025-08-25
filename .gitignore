@@ -4,4 +4,4 @@ node_modules
 public
 .env
 google_oauth_data.json
-.sqlite
+database.sqlite
