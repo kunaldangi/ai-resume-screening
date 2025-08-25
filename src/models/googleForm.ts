@@ -12,7 +12,7 @@ export async function initializeGoogleFormModel(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'users', // Assuming 'users' is the name of the users table
+                model: 'users',
                 key: 'id'
             }
         },
@@ -23,6 +23,10 @@ export async function initializeGoogleFormModel(sequelize: Sequelize) {
         formTitle: {
             type: DataTypes.STRING(255),
             allowNull: false,
+        },
+        formPrompt: {
+            type: DataTypes.TEXT,
+            allowNull: false
         }
     })
 }

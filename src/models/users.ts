@@ -21,9 +21,13 @@ export async function initializeUsersModel(sequelize: Sequelize) {
             type: DataTypes.STRING(62),
             allowNull: false
         },
-        googleAccessToken: {
+        googleAccessToken: { // for working with Google Form
             type: DataTypes.STRING,
             allowNull: true
         },
+        googleRefreshToken: { // for working with Google Form
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     })
 }

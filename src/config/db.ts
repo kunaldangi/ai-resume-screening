@@ -3,6 +3,7 @@ import { Model, ModelCtor, Sequelize } from "sequelize";
 
 import { initializeUsersModel } from '../models/users';
 import { initializeGoogleFormModel } from '../models/googleForm';
+import { initializeFormResponsesModel } from '../models/formResponse';
 
 // const sequelize = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASS}`, {
 //     host: `${process.env.DB_HOST}`,
@@ -17,6 +18,7 @@ const sequelize = new Sequelize({
 
 let Users: ModelCtor<Model<any, any>>;
 let GoogleForm: ModelCtor<Model<any, any>>;
+let FormResponse: ModelCtor<Model<any, any>>;
 
 export default async function initializeDatabase() {
     try {
@@ -25,6 +27,7 @@ export default async function initializeDatabase() {
 
         Users = await initializeUsersModel(sequelize);
         GoogleForm = await initializeGoogleFormModel(sequelize);
+        FormResponse = await initializeFormResponsesModel(sequelize);
         await sequelize.sync({ alter: true });
 
     } catch (error) {
@@ -32,4 +35,4 @@ export default async function initializeDatabase() {
     }
 }
 
-export { sequelize, Users, GoogleForm };
+export { sequelize, Users, GoogleForm, FormResponse };
